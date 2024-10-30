@@ -14,7 +14,7 @@ app.get('/api/persons', (req, res) => {
   res.json(persons);
 });
 
-// New route for /info
+// Route for /info
 app.get('/info', (req, res) => {
   const date = new Date();
   const info = `
@@ -22,6 +22,18 @@ app.get('/info', (req, res) => {
     <p>${date}</p>
   `;
   res.send(info);
+});
+
+// Route to get a person by ID
+app.get('/api/persons/:id', (req, res) => {
+  const id = Number(req.params.id);
+  const person = persons.find(p => p.id === id);
+
+  if (person) {
+    res.json(person);
+  } else {
+    res.status(404).send({ error: 'Person not found' });
+  }
 });
 
 app.listen(PORT, () => {
