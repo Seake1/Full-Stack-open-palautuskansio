@@ -9,8 +9,19 @@ const persons = [
   { id: 4, name: 'Mary Poppendieck', number: '39-23-6423122' }
 ];
 
+// Route to get all persons
 app.get('/api/persons', (req, res) => {
   res.json(persons);
+});
+
+// New route for /info
+app.get('/info', (req, res) => {
+  const date = new Date();
+  const info = `
+    <p>Phonebook has info for ${persons.length} people</p>
+    <p>${date}</p>
+  `;
+  res.send(info);
 });
 
 app.listen(PORT, () => {
